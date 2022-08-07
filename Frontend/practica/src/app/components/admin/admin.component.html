@@ -1,0 +1,47 @@
+<div class="m-5">
+  <h1>Procesos</h1>
+
+
+
+  <div style="width: 60%; float:left">
+    <h4>Seleccione proceso</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Proceso</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food.value" (click)="visualizar(food.value)">
+          {{food.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+  </div>
+  <div style="width: 40%; float:right">
+    <h3>Total de procesos: {{dataCPU.procesos}} </h3>
+    <h3>Procesos en ejecución: {{dataCPU.ejecucion}}</h3>
+    <h3>Procesos suspendidos: {{dataCPU.suspendidos}}</h3>
+    <h3>Procesos detenidos: {{dataCPU.detenidos}}</h3>
+    <h3>Procesos zombies: {{dataCPU.zombies}}</h3>
+    <button mat-raised-button color="primary" (click)="fetchCPU()">Actualizar</button>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div style="display: block">
+    <canvas baseChart
+    height="5vh" width="10vw"
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [type]="barChartType"
+    >
+    </canvas>
+  </div>
+
+</div>

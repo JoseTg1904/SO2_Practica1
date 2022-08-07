@@ -1,0 +1,122 @@
+<div class="m-5">
+  <h1>Arbol de procesos</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <mat-tree
+        [dataSource]="dataSource"
+        [treeControl]="treeControl"
+        class="example-tree"
+      >
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+          <span style="margin-left: 35px">{{ node.nombre }}</span>
+          <span style="margin-left: 35px">PID: {{ node.pid }}</span>
+          <span *ngIf="node.estado" style="margin-left: 35px"
+            >Estado: {{ node.estado }}</span
+          >
+          <span *ngIf="node.usuario" style="margin-left: 35px"
+            >Usuario: {{ node.usuario }}</span
+          >
+          <button
+            style="margin-left: 25px"
+            type="button"
+            class="btn btn-info"
+            (click)="getGeneralStrace(node.pid)"
+          >
+            Strace
+          </button>
+          <button
+            style="margin-left: 25px"
+            type="button"
+            class="btn btn-dark"
+            (click)="getSyscall(node.pid)"
+          >
+            Syscalls
+          </button>
+          <button
+            style="margin-left: 25px"
+            type="button"
+            class="btn btn-danger"
+            (click)="getKill(node.pid)"
+          >
+            Kill
+          </button>
+        </mat-tree-node>
+        <mat-nested-tree-node
+          style="border-bottom: solid"
+          *matTreeNodeDef="let node; when: hasChild"
+        >
+          <div class="mat-tree-node">
+            <button
+              mat-icon-button
+              matTreeNodeToggle
+              [attr.aria-label]="'Toggle ' + node.nombre"
+            >
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{
+                  treeControl.isExpanded(node) ? "expand_more" : "chevron_right"
+                }}
+              </mat-icon>
+            </button>
+            <span>{{ node.nombre }}</span>
+            <span style="margin-left: 35px">PID: {{ node.pid }}</span>
+            <span *ngIf="node.estado" style="margin-left: 35px"
+              >Estado: {{ node.estado }}</span
+            >
+            <span *ngIf="node.usuario" style="margin-left: 35px"
+              >Usuario: {{ node.usuario }}</span
+            >
+            <button
+              style="margin-left: 25px"
+              type="button"
+              class="btn btn-info"
+              (click)="getGeneralStrace(node.pid)"
+            >
+              Strace
+            </button>
+            <button
+              style="margin-left: 25px"
+              type="button"
+              class="btn btn-dark"
+              (click)="getSyscall(node.pid)"
+            >
+              Syscalls
+            </button>
+            <button
+              style="margin-left: 25px"
+              type="button"
+              class="btn btn-danger"
+              (click)="getKill(node.pid)"
+            >
+              Kill
+            </button>
+          </div>
+          <div
+            [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+            role="group"
+          >
+            <ng-container matTreeNodeOutlet></ng-container>
+          </div>
+        </mat-nested-tree-node>
+      </mat-tree>
+    </div>
+    <div class="col-md-4">
+      <h1>Syscalls</h1>
+      <input type="text" id="syscallInput" />
+      <button type="button" class="btn btn-primary m-2" (click)="add()">
+        Agregar
+      </button>
+      <button type="button" class="btn btn-danger m-2" (click)="delete()">
+        Eliminar
+      </button>
+      <div *ngFor="let syscall of syscalls">
+        <span>
+          {{ syscall }}
+        </span>
+      </div>
+      <h1>Resultado Syscall</h1>
+      <div><span id="resultSyscall"></span></div>
+      <h1 class="mt-4">Strace General</h1>
+      <div><span id="generalStrace"></span></div>
+    </div>
+  </div>
+</div>

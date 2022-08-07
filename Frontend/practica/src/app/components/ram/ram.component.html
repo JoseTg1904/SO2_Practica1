@@ -1,0 +1,44 @@
+<div class="m-5">
+    <div >
+
+        <div style="float:left;width: 30%;">
+            <h1>Consumo de memoria </h1>
+        </div>
+        <div style="float:right;width: 30%;">
+            <h3 style="color: grey;">4 GB</h3>
+        </div>  
+    </div>
+    <br>
+    <br>
+    <br>
+    Consumo en tiempo real
+    <div class="flex-item">
+        <div style="display: block;">
+        <canvas baseChart  height="5vh" width="10vw"
+            
+                    [data]="lineChartData"
+                    [type]="lineChartType"
+                    ></canvas>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    RAM del servidor: {{ dataRam.total }} MB
+    <br>
+    <br>
+    RAM consumida: {{ dataRam.consumida }} MB
+    <br>
+    <br>
+    Porcentaje de consumo de ram: {{dataRam.porcentaje}}%
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+</div>
